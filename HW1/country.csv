@@ -1,0 +1,240 @@
+country_code,country_name,continent,surface_area,population,gnp,government_form,code2
+ABW,Aruba,North America,193,103000,828,Nonmetropolitan Territory of The Netherlands,AW
+AFG,Afghanistan,Asia,652090,22720000,5976,Islamic Emirate,AF
+AGO,Angola,Africa,1246700,12878000,6648,Republic,AO
+AIA,Anguilla,North America,96,8000,63.2,Dependent Territory of the UK,AI
+ALB,Albania,Europe,28748,3401200,3205,Republic,AL
+AND,Andorra,Europe,468,78000,1630,Parliamentary Coprincipality,AD
+ANT,Netherlands Antilles,North America,800,217000,1941,Nonmetropolitan Territory of The Netherlands,AN
+ARE,United Arab Emirates,Asia,83600,2441000,37966,Emirate Federation,AE
+ARG,Argentina,South America,2780400,37032000,340238,Federal Republic,AR
+ARM,Armenia,Asia,29800,3520000,1813,Republic,AM
+ASM,American Samoa,Oceania,199,68000,334,US Territory,AS
+ATA,Antarctica,Antarctica,13120000,0,0,Co-administrated,AQ
+ATF,French Southern territories,Antarctica,7780,0,0,Nonmetropolitan Territory of France,TF
+ATG,Antigua and Barbuda,North America,442,68000,612,Constitutional Monarchy,AG
+AUS,Australia,Oceania,7741220,18886000,351182,"Constitutional Monarchy, Federation",AU
+AUT,Austria,Europe,83859,8091800,211860,Federal Republic,AT
+AZE,Azerbaijan,Asia,86600,7734000,4127,Federal Republic,AZ
+BDI,Burundi,Africa,27834,6695000,903,Republic,BI
+BEL,Belgium,Europe,30518,10239000,249704,"Constitutional Monarchy, Federation",BE
+BEN,Benin,Africa,112622,6097000,2357,Republic,BJ
+BFA,Burkina Faso,Africa,274000,11937000,2425,Republic,BF
+BGD,Bangladesh,Asia,143998,129155000,32852,Republic,BD
+BGR,Bulgaria,Europe,110994,8190900,12178,Republic,BG
+BHR,Bahrain,Asia,694,617000,6366,Monarchy (Emirate),BH
+BHS,Bahamas,North America,13878,307000,3527,Constitutional Monarchy,BS
+BIH,Bosnia and Herzegovina,Europe,51197,3972000,2841,Federal Republic,BA
+BLR,Belarus,Europe,207600,10236000,13714,Republic,BY
+BLZ,Belize,North America,22696,241000,630,Constitutional Monarchy,BZ
+BMU,Bermuda,North America,53,65000,2328,Dependent Territory of the UK,BM
+BOL,Bolivia,South America,1098581,8329000,8571,Republic,BO
+BRA,Brazil,South America,8547403,170115000,776739,Federal Republic,BR
+BRB,Barbados,North America,430,270000,2223,Constitutional Monarchy,BB
+BRN,Brunei,Asia,5765,328000,11705,Monarchy (Sultanate),BN
+BTN,Bhutan,Asia,47000,2124000,372,Monarchy,BT
+BVT,Bouvet Island,Antarctica,59,0,0,Dependent Territory of Norway,BV
+BWA,Botswana,Africa,581730,1622000,4834,Republic,BW
+CAF,Central African Republic,Africa,622984,3615000,1054,Republic,CF
+CAN,Canada,North America,9970610,31147000,598862,"Constitutional Monarchy, Federation",CA
+CCK,Cocos (Keeling) Islands,Oceania,14,600,0,Territory of Australia,CC
+CHE,Switzerland,Europe,41284,7160400,264478,Federation,CH
+CHL,Chile,South America,756626,15211000,72949,Republic,CL
+CHN,China,Asia,9572900,1277558000,982268,People'sRepublic,CN
+CIV,Côte d’Ivoire,Africa,322463,14786000,11345,Republic,CI
+CMR,Cameroon,Africa,475442,15085000,9174,Republic,CM
+COD,"Congo, The Democratic Republic of the",Africa,2344858,51654000,6964,Republic,CD
+COG,Congo,Africa,342000,2943000,2108,Republic,CG
+COK,Cook Islands,Oceania,236,20000,100,Nonmetropolitan Territory of New Zealand,CK
+COL,Colombia,South America,1138914,42321000,102896,Republic,CO
+COM,Comoros,Africa,1862,578000,4401,Republic,KM
+CPV,Cape Verde,Africa,4033,428000,435,Republic,CV
+CRI,Costa Rica,North America,51100,4023000,10226,Republic,CR
+CUB,Cuba,North America,110861,11201000,17843,Socialistic Republic,CU
+CXR,Christmas Island,Oceania,135,2500,0,Territory of Australia,CX
+CYM,Cayman Islands,North America,264,38000,1263,Dependent Territory of the UK,KY
+CYP,Cyprus,Asia,9251,754700,9333,Republic,CY
+CZE,Czech Republic,Europe,78866,10278100,55017,Republic,CZ
+DEU,Germany,Europe,357022,82164700,2133367,Federal Republic,DE
+DJI,Djibouti,Africa,23200,638000,382,Republic,DJ
+DMA,Dominica,North America,751,71000,256,Republic,DM
+DNK,Denmark,Europe,43094,5330000,174099,Constitutional Monarchy,DK
+DOM,Dominican Republic,North America,48511,8495000,15846,Republic,DO
+DZA,Algeria,Africa,2381741,31471000,49982,Republic,DZ
+ECU,Ecuador,South America,283561,12646000,19770,Republic,EC
+EGY,Egypt,Africa,1001449,68470000,82710,Republic,EG
+ERI,Eritrea,Africa,117600,3850000,650,Republic,ER
+ESH,Western Sahara,Africa,266000,293000,60,Occupied by Marocco,EH
+ESP,Spain,Europe,505992,39441700,553233,Constitutional Monarchy,ES
+EST,Estonia,Europe,45227,1439200,5328,Republic,EE
+ETH,Ethiopia,Africa,1104300,62565000,6353,Republic,ET
+FIN,Finland,Europe,338145,5171300,121914,Republic,FI
+FJI,Fiji Islands,Oceania,18274,817000,1536,Republic,FJ
+FLK,Falkland Islands,South America,12173,2000,0,Dependent Territory of the UK,FK
+FRA,France,Europe,551500,59225700,1424285,Republic,FR
+FRO,Faroe Islands,Europe,1399,43000,0,Part of Denmark,FO
+FSM,"Micronesia, Federated States of",Oceania,702,119000,212,Federal Republic,FM
+GAB,Gabon,Africa,267668,1226000,5493,Republic,GA
+GBR,United Kingdom,Europe,242900,59623400,1378330,Constitutional Monarchy,GB
+GEO,Georgia,Asia,69700,4968000,6064,Republic,GE
+GHA,Ghana,Africa,238533,20212000,7137,Republic,GH
+GIB,Gibraltar,Europe,6,25000,258,Dependent Territory of the UK,GI
+GIN,Guinea,Africa,245857,7430000,2352,Republic,GN
+GLP,Guadeloupe,North America,1705,456000,3501,Overseas Department of France,GP
+GMB,Gambia,Africa,11295,1305000,320,Republic,GM
+GNB,Guinea-Bissau,Africa,36125,1213000,293,Republic,GW
+GNQ,Equatorial Guinea,Africa,28051,453000,283,Republic,GQ
+GRC,Greece,Europe,131626,10545700,120724,Republic,GR
+GRD,Grenada,North America,344,94000,318,Constitutional Monarchy,GD
+GRL,Greenland,North America,2166090,56000,0,Part of Denmark,GL
+GTM,Guatemala,North America,108889,11385000,19008,Republic,GT
+GUF,French Guiana,South America,90000,181000,681,Overseas Department of France,GF
+GUM,Guam,Oceania,549,168000,1197,US Territory,GU
+GUY,Guyana,South America,214969,861000,722,Republic,GY
+HKG,Hong Kong,Asia,1075,6782000,166448,Special Administrative Region of China,HK
+HMD,Heard Island and McDonald Islands,Antarctica,359,0,0,Territory of Australia,HM
+HND,Honduras,North America,112088,6485000,5333,Republic,HN
+HRV,Croatia,Europe,56538,4473000,20208,Republic,HR
+HTI,Haiti,North America,27750,8222000,3459,Republic,HT
+HUN,Hungary,Europe,93030,10043200,48267,Republic,HU
+IDN,Indonesia,Asia,1904569,212107000,84982,Republic,ID
+IND,India,Asia,3287263,1013662000,447114,Federal Republic,IN
+IOT,British Indian Ocean Territory,Africa,78,0,0,Dependent Territory of the UK,IO
+IRL,Ireland,Europe,70273,3775100,75921,Republic,IE
+IRN,Iran,Asia,1648195,67702000,195746,Islamic Republic,IR
+IRQ,Iraq,Asia,438317,23115000,11500,Republic,IQ
+ISL,Iceland,Europe,103000,279000,8255,Republic,IS
+ISR,Israel,Asia,21056,6217000,97477,Republic,IL
+ITA,Italy,Europe,301316,57680000,1161755,Republic,IT
+JAM,Jamaica,North America,10990,2583000,6871,Constitutional Monarchy,JM
+JOR,Jordan,Asia,88946,5083000,7526,Constitutional Monarchy,JO
+JPN,Japan,Asia,377829,126714000,3787042,Constitutional Monarchy,JP
+KAZ,Kazakstan,Asia,2724900,16223000,24375,Republic,KZ
+KEN,Kenya,Africa,580367,30080000,9217,Republic,KE
+KGZ,Kyrgyzstan,Asia,199900,4699000,1626,Republic,KG
+KHM,Cambodia,Asia,181035,11168000,5121,Constitutional Monarchy,KH
+KIR,Kiribati,Oceania,726,83000,40.7,Republic,KI
+KNA,Saint Kitts and Nevis,North America,261,38000,299,Constitutional Monarchy,KN
+KOR,South Korea,Asia,99434,46844000,320749,Republic,KR
+KWT,Kuwait,Asia,17818,1972000,27037,Constitutional Monarchy (Emirate),KW
+LAO,Laos,Asia,236800,5433000,1292,Republic,LA
+LBN,Lebanon,Asia,10400,3282000,17121,Republic,LB
+LBR,Liberia,Africa,111369,3154000,2012,Republic,LR
+LBY,Libyan Arab Jamahiriya,Africa,1759540,5605000,44806,Socialistic State,LY
+LCA,Saint Lucia,North America,622,154000,571,Constitutional Monarchy,LC
+LIE,Liechtenstein,Europe,160,32300,1119,Constitutional Monarchy,LI
+LKA,Sri Lanka,Asia,65610,18827000,15706,Republic,LK
+LSO,Lesotho,Africa,30355,2153000,1061,Constitutional Monarchy,LS
+LTU,Lithuania,Europe,65301,3698500,10692,Republic,LT
+LUX,Luxembourg,Europe,2586,435700,16321,Constitutional Monarchy,LU
+LVA,Latvia,Europe,64589,2424200,6398,Republic,LV
+MAC,Macao,Asia,18,473000,5749,Special Administrative Region of China,MO
+MAR,Morocco,Africa,446550,28351000,36124,Constitutional Monarchy,MA
+MCO,Monaco,Europe,1.5,34000,776,Constitutional Monarchy,MC
+MDA,Moldova,Europe,33851,4380000,1579,Republic,MD
+MDG,Madagascar,Africa,587041,15942000,3750,Federal Republic,MG
+MDV,Maldives,Asia,298,286000,199,Republic,MV
+MEX,Mexico,North America,1958201,98881000,414972,Federal Republic,MX
+MHL,Marshall Islands,Oceania,181,64000,97,Republic,MH
+MKD,Macedonia,Europe,25713,2024000,1694,Republic,MK
+MLI,Mali,Africa,1240192,11234000,2642,Republic,ML
+MLT,Malta,Europe,316,380200,3512,Republic,MT
+MMR,Myanmar,Asia,676578,45611000,180375,Republic,MM
+MNG,Mongolia,Asia,1566500,2662000,1043,Republic,MN
+MNP,Northern Mariana Islands,Oceania,464,78000,0,Commonwealth of the US,MP
+MOZ,Mozambique,Africa,801590,19680000,2891,Republic,MZ
+MRT,Mauritania,Africa,1025520,2670000,998,Republic,MR
+MSR,Montserrat,North America,102,11000,109,Dependent Territory of the UK,MS
+MTQ,Martinique,North America,1102,395000,2731,Overseas Department of France,MQ
+MUS,Mauritius,Africa,2040,1158000,4251,Republic,MU
+MWI,Malawi,Africa,118484,10925000,1687,Republic,MW
+MYS,Malaysia,Asia,329758,22244000,69213,"Constitutional Monarchy, Federation",MY
+MYT,Mayotte,Africa,373,149000,0,Territorial Collectivity of France,YT
+NAM,Namibia,Africa,824292,1726000,3101,Republic,NA
+NCL,New Caledonia,Oceania,18575,214000,3563,Nonmetropolitan Territory of France,NC
+NER,Niger,Africa,1267000,10730000,1706,Republic,NE
+NFK,Norfolk Island,Oceania,36,2000,0,Territory of Australia,NF
+NGA,Nigeria,Africa,923768,111506000,65707,Federal Republic,NG
+NIC,Nicaragua,North America,130000,5074000,1988,Republic,NI
+NIU,Niue,Oceania,260,2000,0,Nonmetropolitan Territory of New Zealand,NU
+NLD,Netherlands,Europe,41526,15864000,371362,Constitutional Monarchy,NL
+NOR,Norway,Europe,323877,4478500,145895,Constitutional Monarchy,NO
+NPL,Nepal,Asia,147181,23930000,4768,Constitutional Monarchy,NP
+NRU,Nauru,Oceania,21,12000,197,Republic,NR
+NZL,New Zealand,Oceania,270534,3862000,54669,Constitutional Monarchy,NZ
+OMN,Oman,Asia,309500,2542000,16904,Monarchy (Sultanate),OM
+PAK,Pakistan,Asia,796095,156483000,61289,Republic,PK
+PAN,Panama,North America,75517,2856000,9131,Republic,PA
+PCN,Pitcairn,Oceania,49,50,0,Dependent Territory of the UK,PN
+PER,Peru,South America,1285216,25662000,64140,Republic,PE
+PHL,Philippines,Asia,300000,75967000,65107,Republic,PH
+PLW,Palau,Oceania,459,19000,105,Republic,PW
+PNG,Papua New Guinea,Oceania,462840,4807000,4988,Constitutional Monarchy,PG
+POL,Poland,Europe,323250,38653600,151697,Republic,PL
+PRI,Puerto Rico,North America,8875,3869000,34100,Commonwealth of the US,PR
+PRK,North Korea,Asia,120538,24039000,5332,Socialistic Republic,KP
+PRT,Portugal,Europe,91982,9997600,105954,Republic,PT
+PRY,Paraguay,South America,406752,5496000,8444,Republic,PY
+PSE,Palestine,Asia,6257,3101000,4173,Autonomous Area,PS
+PYF,French Polynesia,Oceania,4000,235000,818,Nonmetropolitan Territory of France,PF
+QAT,Qatar,Asia,11000,599000,9472,Monarchy,QA
+REU,Réunion,Africa,2510,699000,8287,Overseas Department of France,RE
+ROM,Romania,Europe,238391,22455500,38158,Republic,RO
+RUS,Russian Federation,Europe,17075400,146934000,276608,Federal Republic,RU
+RWA,Rwanda,Africa,26338,7733000,2036,Republic,RW
+SAU,Saudi Arabia,Asia,2149690,21607000,137635,Monarchy,SA
+SDN,Sudan,Africa,2505813,29490000,10162,Islamic Republic,SD
+SEN,Senegal,Africa,196722,9481000,4787,Republic,SN
+SGP,Singapore,Asia,618,3567000,86503,Republic,SG
+SGS,South Georgia and the South Sandwich Islands,Antarctica,3903,0,0,Dependent Territory of the UK,GS
+SHN,Saint Helena,Africa,314,6000,0,Dependent Territory of the UK,SH
+SJM,Svalbard and Jan Mayen,Europe,62422,3200,0,Dependent Territory of Norway,SJ
+SLB,Solomon Islands,Oceania,28896,444000,182,Constitutional Monarchy,SB
+SLE,Sierra Leone,Africa,71740,4854000,746,Republic,SL
+SLV,El Salvador,North America,21041,6276000,11863,Republic,SV
+SMR,San Marino,Europe,61,27000,510,Republic,SM
+SOM,Somalia,Africa,637657,10097000,935,Republic,SO
+SPM,Saint Pierre and Miquelon,North America,242,7000,0,Territorial Collectivity of France,PM
+STP,Sao Tome and Principe,Africa,964,147000,6,Republic,ST
+SUR,Suriname,South America,163265,417000,870,Republic,SR
+SVK,Slovakia,Europe,49012,5398700,20594,Republic,SK
+SVN,Slovenia,Europe,20256,1987800,19756,Republic,SI
+SWE,Sweden,Europe,449964,8861400,226492,Constitutional Monarchy,SE
+SWZ,Swaziland,Africa,17364,1008000,1206,Monarchy,SZ
+SYC,Seychelles,Africa,455,77000,536,Republic,SC
+SYR,Syria,Asia,185180,16125000,65984,Republic,SY
+TCA,Turks and Caicos Islands,North America,430,17000,96,Dependent Territory of the UK,TC
+TCD,Chad,Africa,1284000,7651000,1208,Republic,TD
+TGO,Togo,Africa,56785,4629000,1449,Republic,TG
+THA,Thailand,Asia,513115,61399000,116416,Constitutional Monarchy,TH
+TJK,Tajikistan,Asia,143100,6188000,1990,Republic,TJ
+TKL,Tokelau,Oceania,12,2000,0,Nonmetropolitan Territory of New Zealand,TK
+TKM,Turkmenistan,Asia,488100,4459000,4397,Republic,TM
+TMP,East Timor,Asia,14874,885000,0,Administrated by the UN,TP
+TON,Tonga,Oceania,650,99000,146,Monarchy,TO
+TTO,Trinidad and Tobago,North America,5130,1295000,6232,Republic,TT
+TUN,Tunisia,Africa,163610,9586000,20026,Republic,TN
+TUR,Turkey,Asia,774815,66591000,210721,Republic,TR
+TUV,Tuvalu,Oceania,26,12000,6,Constitutional Monarchy,TV
+TWN,Taiwan,Asia,36188,22256000,256254,Republic,TW
+TZA,Tanzania,Africa,883749,33517000,8005,Republic,TZ
+UGA,Uganda,Africa,241038,21778000,6313,Republic,UG
+UKR,Ukraine,Europe,603700,50456000,42168,Republic,UA
+UMI,United States Minor Outlying Islands,Oceania,16,0,0,Dependent Territory of the US,UM
+URY,Uruguay,South America,175016,3337000,20831,Republic,UY
+USA,United States,North America,9363520,278357000,8510700,Federal Republic,US
+UZB,Uzbekistan,Asia,447400,24318000,14194,Republic,UZ
+VAT,Holy See (Vatican City State),Europe,0.4,1000,9,Independent Church State,VA
+VCT,Saint Vincent and the Grenadines,North America,388,114000,285,Constitutional Monarchy,VC
+VEN,Venezuela,South America,912050,24170000,95023,Federal Republic,VE
+VGB,"Virgin Islands, British",North America,151,21000,612,Dependent Territory of the UK,VG
+VIR,"Virgin Islands, U.S.",North America,347,93000,0,US Territory,VI
+VNM,Vietnam,Asia,331689,79832000,21929,Socialistic Republic,VN
+VUT,Vanuatu,Oceania,12189,190000,261,Republic,VU
+WLF,Wallis and Futuna,Oceania,200,15000,0,Nonmetropolitan Territory of France,WF
+WSM,Samoa,Oceania,2831,180000,141,Parlementary Monarchy,WS
+YEM,Yemen,Asia,527968,18112000,6041,Republic,YE
+YUG,Yugoslavia,Europe,102173,10640000,17000,Federal Republic,YU
+ZAF,South Africa,Africa,1221037,40377000,116729,Republic,ZA
+ZMB,Zambia,Africa,752618,9169000,3377,Republic,ZM
+ZWE,Zimbabwe,Africa,390757,11669000,5951,Republic,ZW
