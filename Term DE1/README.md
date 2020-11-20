@@ -127,7 +127,7 @@ The schema structure is below:
 
 ### Analytics ###
 
-We will create two data warehouses with one focusing on available listings by host and other specifically focusing on hosts. These two tables will be created through stored procedures.There is also a trigger in place which saves current information stores it in a new table called 'messages' before the update is made.
+We will create two data warehouses with one focusing on available listings by host and other specifically focusing on hosts. These two tables will be created through stored procedures.There is also a trigger in place which saves current information stores it in a new table called 'listings_audit' before the update is made.
 
 With the huge amount of data that has been collected, we would like to consider the following questions for analysis:
 
@@ -138,7 +138,7 @@ A subset of the data will be taken from the 'available_listings' data warehouse 
 ~~~~
 2. Which hosts have an overall rating of less than 65 with number of reviews greater or equal to 3 to single out badly performing hosts?
 ~~~~
-We will use the host_ratings data warehouse to extract information and create a View through a scheduled Event. This event will create a monthly listing every 30 days for 5 months identifying hosts who needs to be sent a warning.
+We will use the host_ratings data warehouse to extract information and create a View through a scheduled Event. This event will create a monthly listing every 30 days for 5 months identifying hosts who needs to be sent a warning. A trigger will save also save a trigger issued statement into a seperate table 'messages' which helps us make sure that the trigger ran.
 
 ~~~~
 3. Who are the top 5 best performing hosts in terms or ratings and number of reviews?
@@ -197,7 +197,7 @@ SELECT * FROM available_listings;
 ![availability_listings](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/available_listings.PNG)
 
 
-**Host Ratings**
+**Host Ratings** \
 Next we create another Data Warehouse through a stored procedure that specifically focuses on host related information such as ratings and number of reviews.
 ~~~~
 
@@ -243,6 +243,7 @@ SELECT * FROM host_ratings;
 In MySQL, a trigger is a stored program invoked automatically in response to an ACTION such as AN insert, update, or delete that occurs in the associated table. It can be very useful in tracking changes to your data in the database. A trigger was designed to save current information regarding a listing before the user updated it. This helps us ensure that keep track of all the activity of our hosts and listings in case any sort of technical or legal issue arises.
 We created another table by the name of listings_audit where the old information will be saved before its updated. 
 
+****'Before Host Info Update' Trigger****
 ~~~~
 DROP TABLE IF EXISTS listings_audit;    
 
@@ -279,7 +280,8 @@ END$$
 
 DELIMITER ;
 ~~~~
-Once the trigger had been created, we tested the trigger to ensure that it works.
+
+**Once the trigger had been created, we tested the trigger to ensure that it works.**
 ~~~~
 
 UPDATE listings
@@ -296,7 +298,7 @@ The trigger was successful and our listings_audit table has been updated with th
 
 
 ### DATAMARTS with VIEWS ###
-With views we take a subset of the datastore and prepare them for a BI operations.To help answer our analyitcal questions, we used Views for understanding.
+With views we take a subset of the datastore and prepare them for a BI operations.To help answer our analytical questions, we used Views for understanding.
 
 **Price statistics by Property Type**
 ~~~~
@@ -316,10 +318,7 @@ GROUP BY property_type
 ORDER BY property_type;
 ~~~~
 
- 
-
-### Materialized View with Event
-Hosts with host rating score less than 50
+Hosts with host rating score less than 65 and reviews >= 3
 
 ~~~~
 DROP VIEW IF EXISTS host_rating_warning;
@@ -358,7 +357,7 @@ SELECT * FROM host_rating_warning;
 ~~~~
 
 
-**Top 5 hosts every month**
+**Top 5 superhosts every month**
 ~~~~
 DROP EVENT IF EXISTS top_5_hosts_monthly;
 
