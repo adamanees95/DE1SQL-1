@@ -322,7 +322,7 @@ GROUP BY property_type
 ORDER BY property_type;
 ~~~~
 
-Hosts with host rating score less than 65 and reviews >= 3
+**Hosts with host rating score less than 65 and reviews >= 3**
 
 ~~~~
 DROP VIEW IF EXISTS host_rating_warning;
