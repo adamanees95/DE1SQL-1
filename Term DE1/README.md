@@ -22,10 +22,11 @@ http://insideairbnb.com/get-the-data.html
 
 
 ### OPERATIONAL LAYER ###
-Create an operational data layer in MySQL. Import a relational data set of your choosing into your local instance. Find a data which makes sense to be transformed in analytical data layer for further analytics.\
- 
 **Create our first database / schema**
 ~~~~
+
+SHOW VARIABLES LIKE "secure_file_priv";
+
 DROP SCHEMA IF EXISTS airbnb;
 CREATE SCHEMA airbnb;
 
@@ -123,12 +124,33 @@ minimum_nights = nullif(@minimum_nights, ''),
 maximum_nights = nullif(@maximum_nights, '');
 ~~~~
 
-### ANALYTICAL LAYER ###
-Design a denormalized data structure using the operational layer.
+The schema structure is below:
 
-We created a denormalized snapshot of a combined listings and hosts tables for available_listings subject. We embed the creation in a stored procedure. Combining several important variables from different tables into one table or warehouse will help us with further analysis.
+![Schema](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/schema.PNG)
 
-#### Stored Procedure ####
+### Analytics ###
+
+We will create two data warehouses with one focusing on available listings by host and other specifically focusing on hosts. These two tables will be created through stored procedures.There is also a trigger in place which saves current information stores it in a new table called 'listings_audit' before the update is made.
+
+With the huge amount of data that has been collected, we would like to consider the following questions for analysis:
+
+~~~~
+1. What are the price statistics 'overall' and 'per person' by property type?
+~~~~
+A subset of the data will be taken from the 'available_listings' data warehouse and we will compute the rounded MIN, MAX, and AVG prices grouped by property_type and shown for both overall and in person scenarios.We will sort the table by property types in alphabetical order.
+~~~~
+2. Which hosts have an overall rating of less than 65 with number of reviews greater or equal to 3 to single out badly performing hosts?
+~~~~
+We will use the host_ratings data warehouse to extract information and create a View through a scheduled Event. This event will create a monthly listing every 30 days for 5 months identifying hosts who needs to be sent a warning. A trigger will save also save a trigger issued statement into a seperate table 'messages' which helps us make sure that the trigger ran.
+
+~~~~
+3. Who are the top 5 best performing hosts in terms or ratings and number of reviews?
+~~~~
+We will use the host_ratings data warehouse to extract information and create a View through a scheduled Event. This event will create a monthly listing every 30 days for 5 months identifying hosts who need to be sent a warning.
+
+### ANALYTICAL LAYER/ ETL PIPELINE ###
+We created a denormalized snapshot of a combined listings and hosts tables for available_listings subject. We embed the creation in a stored procedure inside which we use commands to extract, transform and load the data into a new table. Combining several important variables from different tables into one table or warehouse will help us with further analysis.
+
 **Available Listings**
 ~~~~
 DROP PROCEDURE IF EXISTS Get_available_listings;
@@ -174,7 +196,11 @@ Call Get_available_listings();
 -- View available_listing Data Warehouse
 SELECT * FROM available_listings;
 ~~~~
-**Host Ratings**
+
+![availability_listings](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/available_listings.PNG)
+
+
+**Host Ratings** \
 Next we create another Data Warehouse through a stored procedure that specifically focuses on host related information such as ratings and number of reviews.
 ~~~~
 
@@ -212,10 +238,16 @@ Call Get_host_ratings();
 SELECT * FROM host_ratings;
 ~~~~
 
-### TRIGGERS ###
-In MySQL, a trigger is a stored program invoked automatically in response to an ACTION such as AN insert, update, or delete that occurs in the associated table. It can be very useful in tracking changes to your data in the database. A trigger was designed to save current information regarding a listing before the user updated it. This helps us ensure that keep track of all the activity of our hosts and listings in case any sort of technical or legal issue arises.
+![host_ratings](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/host_ratings.PNG)
+
+
+
+#### TRIGGERS ####
+In MySQL, a trigger is a stored program invoked automatically in response to an ACTION such as AN insert, update, or delete that occurs in the associated table. It can be very useful in tracking changes to your data in the database. 
+A trigger was designed to save current information regarding a listing before the user updated it. This helps us ensure that keep track of all the activity of our hosts and listings in case any sort of technical or legal issue arises.
 We created another table by the name of listings_audit where the old information will be saved before its updated. 
 
+****'Before Host Info Update' Trigger****
 ~~~~
 DROP TABLE IF EXISTS listings_audit;    
 
@@ -252,7 +284,8 @@ END$$
 
 DELIMITER ;
 ~~~~
-Once the trigger had been created, we tested the trigger to ensure that it works.
+
+**Once the trigger had been created, we tested the trigger to ensure that it works.**
 ~~~~
 
 UPDATE listings
@@ -264,12 +297,14 @@ WHERE
 ~~~~
 
 The trigger was successful and our listings_audit table has been updated with the old information.
-#### INSERT IMAGE ####
+
+![warning_trigger](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/warning_trigger.PNG)
+
 
 ### DATAMARTS with VIEWS ###
-With views we take a subset of the datastore and prepare them for a BI operations.To help answer our analyitcal questions, we used Views for underdtanding.
+With views we take a subset of the datastore and prepare them for a BI operations.To help answer our analytical questions, we used Views for understanding.
 
-**Price statsitics by Property Type**
+**Price statistics by Property Type**
 ~~~~
 DROP VIEW IF EXISTS property_type_stats; 
 
@@ -287,10 +322,7 @@ GROUP BY property_type
 ORDER BY property_type;
 ~~~~
 
- 
-
-### Materialized View with Event
-Hosts with host rating score less than 50
+Hosts with host rating score less than 65 and reviews >= 3
 
 ~~~~
 DROP VIEW IF EXISTS host_rating_warning;
@@ -316,7 +348,7 @@ DO
 		CREATE VIEW host_rating_warning AS
 		SELECT *
 		FROM host_ratings
-		WHERE host_rating < 70 AND number_of_reviews > 0
+		WHERE host_rating < 65 AND number_of_reviews >= 3
 		ORDER BY host_rating DESC;
 
 		INSERT INTO messages(message,created_at)
@@ -327,4 +359,39 @@ DELIMITER ;
 
 SELECT * FROM host_rating_warning;
 ~~~~
- 
+
+
+**Top 5 superhosts every month**
+~~~~
+DROP EVENT IF EXISTS top_5_hosts_monthly;
+
+DELIMITER $$
+
+CREATE EVENT top_5_hosts_monthly
+ON SCHEDULE EVERY 30 DAY
+STARTS CURRENT_TIMESTAMP
+ENDS CURRENT_TIMESTAMP + INTERVAL 5 MONTH-- 5 minutes set for test purposes
+ON COMPLETION PRESERVE
+DO
+BEGIN
+DROP VIEW IF EXISTS top_5_superhosts;
+
+CREATE VIEW `top_5_superhosts` AS
+SELECT 
+host_id AS 'Host ID',
+host_name AS 'Host Name',
+host_since AS 'Host Since',
+number_of_reviews AS 'Number of Reviews',
+host_listings_count AS 'No of listings by Host',
+host_rating AS 'Host Rating'
+FROM host_ratings
+WHERE host_is_superhost = 't'
+ORDER BY
+host_rating DESC, number_of_reviews DESC, host_listings_count DESC, host_since DESC
+LIMIT 5;
+
+END$$
+DELIMITER ;
+
+-- Call the view
+Select * FROM top_5_superhosts;
