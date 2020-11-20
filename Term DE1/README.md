@@ -123,12 +123,16 @@ minimum_nights = nullif(@minimum_nights, ''),
 maximum_nights = nullif(@maximum_nights, '');
 ~~~~
 
+The schema structure is below:
+
+![Schema](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/schema.PNG)
+
+
 ### ANALYTICAL LAYER ###
 Design a denormalized data structure using the operational layer.
 
 We created a denormalized snapshot of a combined listings and hosts tables for available_listings subject. We embed the creation in a stored procedure. Combining several important variables from different tables into one table or warehouse will help us with further analysis.
 
-#### Stored Procedure ####
 **Available Listings**
 ~~~~
 DROP PROCEDURE IF EXISTS Get_available_listings;
@@ -174,6 +178,7 @@ Call Get_available_listings();
 -- View available_listing Data Warehouse
 SELECT * FROM available_listings;
 ~~~~
+
 **Host Ratings**
 Next we create another Data Warehouse through a stored procedure that specifically focuses on host related information such as ratings and number of reviews.
 ~~~~
@@ -211,6 +216,15 @@ Call Get_host_ratings();
 -- View Data Warehouse
 SELECT * FROM host_ratings;
 ~~~~
+
+### ANALYTICAL LAYER ### \
+**Availale Listings**
+
+![availability_listings](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/available_listings.PNG)
+
+**Host Ratings**
+
+![![availability_listings](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/host_ratings.PNG)
 
 ### TRIGGERS ###
 In MySQL, a trigger is a stored program invoked automatically in response to an ACTION such as AN insert, update, or delete that occurs in the associated table. It can be very useful in tracking changes to your data in the database. A trigger was designed to save current information regarding a listing before the user updated it. This helps us ensure that keep track of all the activity of our hosts and listings in case any sort of technical or legal issue arises.
@@ -264,7 +278,8 @@ WHERE
 ~~~~
 
 The trigger was successful and our listings_audit table has been updated with the old information.
-#### INSERT IMAGE ####
+
+![warning_trigger](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/warning_trigger.PNG)
 
 ### DATAMARTS with VIEWS ###
 With views we take a subset of the datastore and prepare them for a BI operations.To help answer our analyitcal questions, we used Views for underdtanding.
@@ -327,4 +342,25 @@ DELIMITER ;
 
 SELECT * FROM host_rating_warning;
 ~~~~
- 
+
+**Top 5 hosts**
+~~~~
+-- Create view for top 5 hosts
+DROP VIEW IF EXISTS top_5_superhosts;
+
+CREATE VIEW `top_5_superhosts` AS
+SELECT 
+host_id AS 'Host ID',
+host_name AS 'Host Name',
+host_since AS 'Host Since',
+number_of_reviews AS 'Number of Reviews',
+host_listings_count AS 'No of listings by Host',
+host_rating AS 'Host Rating'
+FROM host_ratings
+WHERE host_is_superhost = 't'
+ORDER BY
+host_rating DESC, number_of_reviews DESC, host_listings_count DESC, host_since DESC
+LIMIT 5;
+
+Select * FROM top_5_superhosts;
+~~~~
