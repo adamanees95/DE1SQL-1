@@ -179,6 +179,9 @@ Call Get_available_listings();
 SELECT * FROM available_listings;
 ~~~~
 
+![availability_listings](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/available_listings.PNG)
+
+
 **Host Ratings**
 Next we create another Data Warehouse through a stored procedure that specifically focuses on host related information such as ratings and number of reviews.
 ~~~~
@@ -217,14 +220,8 @@ Call Get_host_ratings();
 SELECT * FROM host_ratings;
 ~~~~
 
-### ANALYTICAL LAYER ### \
-**Availale Listings**
+![availability_listings](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/host_ratings.PNG)
 
-![availability_listings](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/available_listings.PNG)
-
-**Host Ratings**
-
-![![availability_listings](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/host_ratings.PNG)
 
 ### TRIGGERS ###
 In MySQL, a trigger is a stored program invoked automatically in response to an ACTION such as AN insert, update, or delete that occurs in the associated table. It can be very useful in tracking changes to your data in the database. A trigger was designed to save current information regarding a listing before the user updated it. This helps us ensure that keep track of all the activity of our hosts and listings in case any sort of technical or legal issue arises.
