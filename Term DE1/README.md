@@ -220,7 +220,7 @@ Call Get_host_ratings();
 SELECT * FROM host_ratings;
 ~~~~
 
-![availability_listings](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/host_ratings.PNG)
+![host_ratings](https://github.com/fasihatif/DE1SQL/blob/master/Term%20DE1/host_ratings.PNG)
 
 
 ### TRIGGERS ###
