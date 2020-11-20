@@ -1,20 +1,20 @@
 ## Austin TX Airbnb SQL Project
 
-**Data Source**
+**Data Source**\
 http://insideairbnb.com/get-the-data.html
 
-**Data**
+**Data**\
 **calendar_austin.csv**: This file contains the future available dates and price of the listings
 **listings_austin.csv**: This file contains all information related to previous listing such as property info and reviews
 **hosts_austin.csv**: This file contains information about hosts who have listings in Austin TX
 
-**Relational Database Schema**
+**Relational Database Schema**\
 **calendar**: Table contains all information from calendar_austin.csv file
 **listings**: Table contains listings information from the austin_listings.csv file
 **hosts**: Table contains hosts information from the hosts_austin.csv file
 
 
-**Schema Relationship**
+**Schema Relationship**\
 Hosts and listings tables are linked together by host_id
 Listings and calendar tables are linked together by listing_id
 
