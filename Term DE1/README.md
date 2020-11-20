@@ -24,6 +24,9 @@ http://insideairbnb.com/get-the-data.html
 ### OPERATIONAL LAYER ###
 **Create our first database / schema**
 ~~~~
+
+SHOW VARIABLES LIKE "secure_file_priv";
+
 DROP SCHEMA IF EXISTS airbnb;
 CREATE SCHEMA airbnb;
 
