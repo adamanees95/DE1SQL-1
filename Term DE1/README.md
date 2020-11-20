@@ -145,7 +145,7 @@ We will use the host_ratings data warehouse to extract information and create a 
 ~~~~
 We will use the host_ratings data warehouse to extract information and create a View through a scheduled Event. This event will create a monthly listing every 30 days for 5 months identifying hosts who need to be sent a warning.
 
-### ANALYTICAL LAYER ###
+### ANALYTICAL LAYER/ ETL PIPELINE ###
 We created a denormalized snapshot of a combined listings and hosts tables for available_listings subject. We embed the creation in a stored procedure inside which we use commands to extract, transform and load the data into a new table. Combining several important variables from different tables into one table or warehouse will help us with further analysis.
 
 **Available Listings**
@@ -239,7 +239,7 @@ SELECT * FROM host_ratings;
 
 
 
-### TRIGGERS ###
+#### TRIGGERS ####
 In MySQL, a trigger is a stored program invoked automatically in response to an ACTION such as AN insert, update, or delete that occurs in the associated table. It can be very useful in tracking changes to your data in the database. 
 A trigger was designed to save current information regarding a listing before the user updated it. This helps us ensure that keep track of all the activity of our hosts and listings in case any sort of technical or legal issue arises.
 We created another table by the name of listings_audit where the old information will be saved before its updated. 
