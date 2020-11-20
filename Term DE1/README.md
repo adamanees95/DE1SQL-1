@@ -146,7 +146,7 @@ We will use the host_ratings data warehouse to extract information and create a 
 ~~~~
 3. Who are the top 5 best performing hosts in terms or ratings and number of reviews?
 ~~~~
-We will use the host_ratings data warehouse to extract information and create a View through a scheduled Event. This event will create a monthly listing every 30 days for 5 months identifying hosts who need to be sent a warning.
+We will use the host_ratings data warehouse to extract information and create a View through a scheduled Event. This event will create a monthly listing every 30 days for 5 months identifying hosts who need to be sent a warning.This information can used to provide these hosts with extra incentives to keep their good performance and encourage other hosts to do so as well.
 
 ### ANALYTICAL LAYER/ ETL PIPELINE ###
 We created a denormalized snapshot of a combined listings and hosts tables for available_listings subject. We embed the creation in a stored procedure inside which we use commands to extract, transform and load the data into a new table. Combining several important variables from different tables into one table or warehouse will help us with further analysis.
