@@ -69,7 +69,6 @@ CREATE TABLE listings (
     listing_name VARCHAR(255),
     listing_description VARCHAR(10500),
     property_type VARCHAR(50),
-    room_type VARCHAR(50),
     accommodates VARCHAR(50),
     bathrooms VARCHAR(25),
     bedrooms INT,
@@ -79,13 +78,7 @@ CREATE TABLE listings (
     maximum_nights INT,
     number_of_reviews INT,
     review_scores_rating INT,
-    review_scores_accuracy INT,
-    review_scores_cleanliness INT,
-    review_scores_checkin INT,
-    review_scores_communication INT,
-    review_scores_location INT,
-    review_scores_value INT,
-    FOREIGN KEY(host_id) REFERENCES airbnb.host(host_id));
+    FOREIGN KEY(host_id) REFERENCES airbnb.hosts(host_id));
     
     
 -- Import listing_austin.csv data into listings table
@@ -94,20 +87,14 @@ INTO TABLE listings
 FIELDS TERMINATED BY ',' ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n' 
 IGNORE 1 LINES 
-(listing_id,host_id,listing_name,listing_description,property_type,room_type,accommodates,bathrooms,@bedrooms,@beds,@price,@minimum_nights,@maximum_nights,number_of_reviews,@review_scores_rating,@review_scores_accuracy,@review_scores_cleanliness,@review_scores_checkin,@review_scores_communication,@review_scores_location,@review_scores_value)
+(listing_id,host_id,listing_name,listing_description,property_type,accommodates,bathrooms,@bedrooms,@beds,@price,@minimum_nights,@maximum_nights,number_of_reviews,@review_scores_rating)
 SET
 bedrooms = nullif(@bedrooms, ''),
 beds = nullif(@beds, ''),
 price = nullif(@price, ''),
 minimum_nights = nullif(@minimum_nights, ''),
 maximum_nights = nullif(@maximum_nights, ''),
-review_scores_rating = nullif(@review_scores_rating , ''),
-review_scores_accuracy = nullif(@review_Scores_accuracy, ''),
-review_scores_cleanliness = nullif(@review_scores_cleanliness,''),
-review_scores_checkin = nullif(@review_scores_checkin, ''),
-review_scores_communication = nullif(@review_scores_communication,''),
-review_scores_location = nullif(@review_scores_location,''),
-review_scores_value = nullif(@review_scores_value,'');
+review_scores_rating = nullif(@review_scores_rating , '');
 ~~~~
 
 3. Calendar
@@ -137,15 +124,18 @@ maximum_nights = nullif(@maximum_nights, '');
 ~~~~
 
 ### ANALYTICAL LAYER ###
-Design a denormalized data structure using the operational layer.\
+Design a denormalized data structure using the operational layer.
+
+We created a denormalized snapshot of a combined listings and hosts tables for available_listings subject. We embed the creation in a stored procedure. Combining several important variables from different tables into one table or warehouse will help us with further analysis.
 
 #### Stored Procedure ####
+**Available Listings**
 ~~~~
-DROP PROCEDURE IF EXISTS Get_Available_listings;
+DROP PROCEDURE IF EXISTS Get_available_listings;
 
 DELIMITER $$
 
-CREATE PROCEDURE Get_Available_listings()
+CREATE PROCEDURE Get_available_listings()
 BEGIN
 
 	DROP TABLE IF EXISTS available_listings;
@@ -156,12 +146,12 @@ BEGIN
 	   listings.listing_name,
 	   calendar.available_date,
        listings.property_type,
-       listings.room_type,
        listings.accommodates,
        listings.beds,
        calendar.minimum_nights,
        calendar.maximum_nights,
        calendar.price,
+       ROUND(calendar.price/listings.accommodates)  AS price_per_person,
 	   hosts.host_id,
        hosts.host_name
 	FROM
@@ -170,65 +160,117 @@ BEGIN
 		calendar USING (listing_id)
 	INNER JOIN
 		hosts USING (host_id)
+	WHERE available = 't'
 	ORDER BY available_date;
+    
+    ALTER TABLE available_listings
+    MODIFY price_per_person FLOAT;
 
 END $$
 DELIMITER ;
 
-Call Get_Available_listings();
+Call Get_available_listings();
 
--- View Data Warehouse
+-- View available_listing Data Warehouse
 SELECT * FROM available_listings;
 ~~~~
+**Host Ratings**
+Next we create another Data Warehouse through a stored procedure that specifically focuses on host related information such as ratings and number of reviews.
 ~~~~
+
+DROP PROCEDURE IF EXISTS Get_host_ratings;
+
 DELIMITER $$
 
-CREATE TRIGGER update_host_rating
-AFTER INSERT
-ON listings FOR EACH ROW
+CREATE PROCEDURE Get_host_ratings()
 BEGIN
-TRUNCATE TABLE host_ratings;
 
-	INSERT INTO host_ratings
-	SELECT host_id,
-	host_name = old.host_name,
+DROP TABLE IF EXISTS host_ratings;
+CREATE TABLE host_ratings
+SELECT host_id,
+	host_name,
 	host_since,
 	host_is_superhost,
 	number_of_reviews,
 	host_listings_count,
-	avg(review_scores_rating) AS host_rating
+	ROUND(avg(review_scores_rating),1) AS host_rating
 	FROM listings
 	INNER JOIN hosts
 	USING(host_id)
 	GROUP BY host_id;
+    
+    ALTER TABLE host_ratings
+    MODIFY host_rating FLOAT;
+    
+END $$
+
+DELIMITER ;
+
+Call Get_host_ratings();
+
+-- View Data Warehouse
+SELECT * FROM host_ratings;
+~~~~
+
+### TRIGGERS ###
+In MySQL, a trigger is a stored program invoked automatically in response to an ACTION such as AN insert, update, or delete that occurs in the associated table. It can be very useful in tracking changes to your data in the database. A trigger was designed to save current information regarding a listing before the user updated it. This helps us ensure that keep track of all the activity of our hosts and listings in case any sort of technical or legal issue arises.
+We created another table by the name of listings_audit where the old information will be saved before its updated. 
+
+~~~~
+DROP TABLE IF EXISTS listings_audit;    
+
+CREATE TABLE listings_audit (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+	listing_id INT NOT NULL,
+    host_id INT NOT NULL,
+    listing_name VARCHAR(255),
+    listing_description VARCHAR(10500),
+    property_type VARCHAR(50),
+    accommodates VARCHAR(50),
+    bathrooms VARCHAR(25),
+    bedrooms INT,
+    beds INT,
+    price INT,
+    minimum_nights INT,
+    maximum_nights INT,
+    number_of_reviews INT,
+    review_scores_rating INT,
+    updatedAt TIMESTAMP DEFAULT NOW()
+);
+
+DROP TRIGGER IF EXISTS before_host_info_update;
+
+DELIMITER $$
+
+CREATE TRIGGER before_host_info_update
+AFTER UPDATE        
+ON listings FOR EACH ROW
+BEGIN
+    INSERT INTO listings_audit(listing_id,host_id,listing_name,listing_description,property_type,accommodates,bathrooms,bedrooms,beds,price,minimum_nights,maximum_nights,number_of_reviews,review_scores_rating)
+    VALUES(OLD.listing_id,OLD.host_id,OLD.listing_name,OLD.listing_description,OLD.property_type,OLD.accommodates,OLD.bathrooms,OLD.bedrooms,OLD.beds,OLD.price,OLD.minimum_nights,OLD.maximum_nights,OLD.number_of_reviews,OLD.review_scores_rating);
 END$$
 
 DELIMITER ;
 ~~~~
-
-##### Testing ####
-TEST TRIGGER BY INSERTING A NEW ROW INTO HOST AND LISTING TABLES
+Once the trigger had been created, we tested the trigger to ensure that it works.
 ~~~~
-INSERT INTO hosts(host_id,host_name, host_since, host_is_superhost, host_listings_count)
-VALUES
-	(99,'Fasih','2020/11/20','t',5);
 
-INSERT INTO listings(listing_id,host_id,listing_name,listing_description,property_type,room_type,accommodates,bathrooms,bedrooms,beds,price,minimum_nights,maximum_nights,number_of_reviews,review_scores_rating,review_scores_accuracy,review_scores_cleanliness,review_scores_checkin,review_scores_communication, review_scores_location, review_scores_value)
-VALUES
- (99,99,'Zen-East','Its great!','Entire house','Entire home/apt',4,'2 baths',2,2,179,7,180,24,93,0,1,1,1,1,1); 
- ~~~~
- 
- Trigger ran successfully
- ~~~~
-  -- TRIGGER WAS SUCCESSFUL. NEW HOST WAS SUCCESSFULLY ADDED IN HOST_RATINGS TABLE
- SELECT * FROM host_ratings
- WHERE host_id = 99;
- ~~~~
- 
-### VIEW ###
-
+UPDATE listings
+SET 
+	number_of_reviews = 29,
+	review_scores_rating = 78
+WHERE
+    listing_id = 2265;
 ~~~~
- -- Create VIEW for summary statistics of property type in relation to price
+
+The trigger was successful and our listings_audit table has been updated with the old information.
+#### INSERT IMAGE ####
+
+### DATAMARTS with VIEWS ###
+With views we take a subset of the datastore and prepare them for a BI operations.To help answer our analyitcal questions, we used Views for underdtanding.
+
+**Price statsitics by Property Type**
+~~~~
 DROP VIEW IF EXISTS property_type_stats; 
 
 CREATE VIEW `property_type_stats` AS
@@ -244,6 +286,8 @@ FROM available_listings
 GROUP BY property_type
 ORDER BY property_type;
 ~~~~
+
+ 
 
 ### Materialized View with Event
 Hosts with host rating score less than 50
